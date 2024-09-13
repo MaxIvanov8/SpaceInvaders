@@ -9,7 +9,7 @@
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Enemies Left:" Foreground="White" Name="EnemiesLeft" FontSize="16" FontWeight="ExtraBold"/>
             <TextBlock Text="Time:" Foreground="White" Name="TimeCounter" FontSize="16" FontWeight="ExtraBold" Margin="10,0,0,0"/>
-</StackPanel>
-        <Rectangle Name="Player1" Fill="White" Height="65" Width="55" Canvas.Left="568" Canvas.Top="394" />
+        </StackPanel>
+        <Rectangle Name="Player1" Fill="White" Height="65" Width="55" Canvas.Left="370" Canvas.Top="400" />
     </Canvas>
 </Window>
