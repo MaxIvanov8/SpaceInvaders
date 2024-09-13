@@ -14,26 +14,19 @@ namespace SpaceInvaders;
 /// </summary>
 public partial class MainWindow
 {
-	// go left and right boolean are set to false
 	private bool _goLeft, _goRight;
-	// this is the enemy bullet timer
 	private int _bulletTimer;
-	// this is the enemy bullet timer limit and frequency
 	private const int BulletTimerLimit = 90;
 	private const int EnemiesCount = 30;
-
-	// save the total number of enemies
-	private int _totalEnemies;
-	// make a new instance of the dispatch timer class
-	private readonly DispatcherTimer _dispatcherTimer;
-	
-	// the default enemy speed
 	private int _enemySpeed = 6;
 
+	private int _totalEnemies;
+	private readonly DispatcherTimer _dispatcherTimer;
+	
+	private readonly DateTime _startTime;
 	public MainWindow()
 	{
 		InitializeComponent();
-		
 		_dispatcherTimer = new DispatcherTimer();
 		_dispatcherTimer.Tick += GameEngine;
 		_dispatcherTimer.Interval = TimeSpan.FromMilliseconds(20);
@@ -43,6 +36,7 @@ public partial class MainWindow
 			ImageSource = GetImageSource(Properties.Resources.player)
 		};
 		MakeEnemies();
+		_startTime = DateTime.Now;
 	}
 
 	private void Canvas_KeyIsDown(object sender, KeyEventArgs e)
@@ -130,8 +124,11 @@ public partial class MainWindow
 		}
 	}
 
+
 	private void GameEngine(object? sender, EventArgs e)
-	{  
+	{
+		var time = DateTime.Now - _startTime;
+		TimeCounter.Text = $"Time: {time.Seconds}.{time.Milliseconds}";
 		if (_goLeft && Canvas.GetLeft(Player1) > 0)
 			Canvas.SetLeft(Player1, Canvas.GetLeft(Player1) - 10);
 		else 
@@ -207,11 +204,11 @@ public partial class MainWindow
 		if (CheckPlayerIntersectsWith(GetRect(x)))
 		{
 			_dispatcherTimer.Stop();
-			MessageBox.Show("you lose");
+			MessageBox.Show("You lose");
 		}
 	}
 
-	private Rect GetRect(Rectangle rectangle) => new(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width, rectangle.Height);
+	private static Rect GetRect(Rectangle rectangle) => new(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width, rectangle.Height);
 
 	private bool CheckPlayerIntersectsWith(Rect rect1) => rect1.IntersectsWith(new Rect(Canvas.GetLeft(Player1), Canvas.GetTop(Player1), Player1.Width, Player1.Height));
 
@@ -223,7 +220,7 @@ public partial class MainWindow
 		if (_totalEnemies < 1)
 		{
 			_dispatcherTimer.Stop();
-			MessageBox.Show("you win");
+			MessageBox.Show("You win!");
 		}
 	}
 }
