@@ -14,11 +14,16 @@ namespace SpaceInvaders;
 /// </summary>
 public partial class MainWindow
 {
-	private bool _goLeft, _goRight;
-	private int _bulletTimer;
 	private const int BulletTimerLimit = 90;
 	private const int EnemiesCount = 30;
 	private int _enemySpeed = 6;
+	private const string BulletConst = nameof(BulletConst);
+	private const string EnemyBulletConst = nameof(EnemyBulletConst);
+	private const string EnemyConst = nameof(EnemyConst);
+
+	private bool _goLeft, _goRight;
+	private int _bulletTimer;
+
 
 	private int _totalEnemies;
 	private readonly DispatcherTimer _dispatcherTimer;
@@ -66,7 +71,7 @@ public partial class MainWindow
 			{
 				var newBullet = new Rectangle
 				{
-					Tag = "bullet",
+					Tag = BulletConst,
 					Height = 20,
 					Width = 5,
 					Fill = Brushes.White,
@@ -109,7 +114,7 @@ public partial class MainWindow
 		{
 			var newEnemy = new Rectangle
 			{
-				Tag = "enemy",
+				Tag = EnemyConst,
 				Height = 45,
 				Width = 45,
 				Fill = new ImageBrush
@@ -140,7 +145,7 @@ public partial class MainWindow
 		{
 			var newEnemyBullet = new Rectangle
 			{
-				Tag = "enemyBullet",
+				Tag = EnemyBulletConst,
 				Height = 40,
 				Width = 15,
 				Fill = Brushes.Yellow,
@@ -159,13 +164,13 @@ public partial class MainWindow
 			var tag = (string)x.Tag;
 			switch (tag)
 			{
-				case "bullet":
+				case BulletConst:
 				{
 					Canvas.SetTop(x, Canvas.GetTop(x) - 20);
 					var bullet = GetRect(x);
 					foreach (var y in elementsList)
 					{
-						if ((string)y.Tag == "enemy" && bullet.IntersectsWith(GetRect(y)))
+						if ((string)y.Tag == EnemyConst && bullet.IntersectsWith(GetRect(y)))
 						{
 							MyCanvas.Children.Remove(y);
 							MyCanvas.Children.Remove(x);
@@ -177,7 +182,7 @@ public partial class MainWindow
 						MyCanvas.Children.Remove(x);
 					break;
 				}
-				case "enemy":
+				case EnemyConst:
 				{
 					Canvas.SetLeft(x, Canvas.GetLeft(x) + _enemySpeed);
 					if (Canvas.GetLeft(x) > 820)
@@ -188,7 +193,7 @@ public partial class MainWindow
 					IsGameLosing(x);
 					break;
 				}
-				case "enemyBullet":
+				case EnemyBulletConst:
 				{
 					Canvas.SetTop(x, Canvas.GetTop(x) + 10);
 					if (Canvas.GetTop(x) > 480) MyCanvas.Children.Remove(x);
