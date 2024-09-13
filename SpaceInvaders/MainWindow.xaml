@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SpaceInvaders"
         mc:Ignorable="d"
-        Title="Space Invaders" Height="500" Width="800" FocusManager.FocusedElement="{Binding ElementName=myCanvas}">
-    <Canvas Name="myCanvas" Background="Black" Focusable="True" KeyDown="Canvas_KeyIsDown" KeyUp="Canvas_KeyIsUp">
-        <TextBlock Text="Enemies Left:" Foreground="White" Name="enemiesLeft" FontSize="16" FontWeight="ExtraBold"/>
-        <Rectangle Name="player1" Fill="White" Height="65" Width="55" Canvas.Left="568" Canvas.Top="394" />
+        Title="Space Invaders" Height="500" Width="800" FocusManager.FocusedElement="{Binding ElementName=MyCanvas}" ResizeMode="NoResize">
+    <Canvas Name="MyCanvas" Background="Black" Focusable="True" KeyDown="Canvas_KeyIsDown" KeyUp="Canvas_KeyIsUp">
+        <TextBlock Text="Enemies Left:" Foreground="White" Name="EnemiesLeft" FontSize="16" FontWeight="ExtraBold"/>
+        <Rectangle Name="Player1" Fill="White" Height="65" Width="55" Canvas.Left="568" Canvas.Top="394" />
     </Canvas>
 </Window>
