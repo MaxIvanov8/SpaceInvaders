@@ -2,7 +2,7 @@
 
 This repo contains .NET8 project of simple game Space Invaders.<br /><br />
 You need to shoot to invaders until you win or lose.
-<br /><br />![alt text](Screenshot.PNG)<br /><br />
+<br /><br />![alt text](Screenshot.jpg)<br /><br />
 
 ## Clone:
 
